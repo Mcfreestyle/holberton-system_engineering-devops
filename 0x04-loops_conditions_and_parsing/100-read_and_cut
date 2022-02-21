@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Displays the content of the file /etc/passwd
+
+file="/etc/passwd"
+
+while IFS=: read -r -a array; do
+	echo "${array[0]}:${array[2]}:${array[5]}"
+done < "$file"
