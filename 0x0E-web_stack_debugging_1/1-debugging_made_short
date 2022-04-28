@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Creates the missing symlink and kill the nginx master process
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled
+pkill -1 nginx
