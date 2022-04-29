@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Print information about the subdomains and domains passed
+
+info_subdomain() {
+	register=$(dig "$2.$1" | grep -A1 'ANSWER SECTION:' |  tail -1 | awk '{print $4}')
+	ip=$(dig "$2.$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')
+	echo "The subdomain $2 is a $register record and points to $ip"
+}
+
+if [ "$#" -eq 1 ]; then
+	sub_domains="www lb-01 web-01 web-02"
+	for sd in $sub_domains; do
+		info_subdomain "$1" "$sd"
+	done
+elif [ "$#" -eq 2 ]; then
+	info_subdomain "$1" "$2"
+fi
