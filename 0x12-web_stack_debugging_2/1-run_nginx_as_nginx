@@ -2,6 +2,7 @@
 # Modify the nginx.conf configuration file to run nginx as nginx user
 # Modify the default configuration file so that nginx listen in port 8080
 # Kill apache2 process
+chmod u+x /etc/nginx/nginx.conf
 sed -i 's/#user www-data;/user nginx;/' /etc/nginx/nginx.conf
 sed -i 's/80/8080/' /etc/nginx/sites-available/default
 pkill apache2
