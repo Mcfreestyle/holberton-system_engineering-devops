@@ -34,7 +34,7 @@ def exportCSV(id_user, username, todo):
             for task in todo]
 
     with open(file_csv, "w") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         writer.writerows(data)
 
 
