@@ -30,7 +30,7 @@ def exportCSV(id_user, username, todo):
         todo = all tasks of user
     """
     file_csv = str(id_user) + ".csv"
-    data = [["2", username, task.get('completed'), task.get('title')]
+    data = [[id_user, username, task.get('completed'), task.get('title')]
             for task in todo]
 
     with open(file_csv, "w") as f:
