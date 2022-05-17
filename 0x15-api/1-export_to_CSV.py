@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """This module provides the `getTodo` and `exportCSV` functions"""
+import csv
 import requests
 from sys import argv
-import csv
 
 
 def getTodo(id_user):
@@ -12,16 +12,16 @@ def getTodo(id_user):
 
     url_user = "{}/users/{}".format(url_api, id_user)
     user = requests.get(url_user).json()
-    name = user.get('name')
+    username = user.get('username')
 
     url_todo = "{}/todos?userId={}".format(url_api, id_user)
     todo = requests.get(url_todo).json()
 
-    info = (name, todo)
+    info = (username, todo)
     return (info)
 
 
-def exportCSV(id_user, name, todo):
+def exportCSV(id_user, username, todo):
     """
     Exports data in CSV format
     Args:
@@ -30,7 +30,7 @@ def exportCSV(id_user, name, todo):
         todo = all tasks of user
     """
     file_csv = str(id_user) + ".csv"
-    data = [["2", name, task.get('completed'), task.get('title')]
+    data = [["2", username, task.get('completed'), task.get('title')]
             for task in todo]
 
     with open(file_csv, "w") as f:
@@ -44,5 +44,5 @@ if __name__ == '__main__':
     except Exception:
         exit()
 
-    (name, todo) = getTodo(id_user)
-    exportCSV(id_user, name, todo)
+    (username, todo) = getTodo(id_user)
+    exportCSV(id_user, username, todo)
